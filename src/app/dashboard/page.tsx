@@ -1,6 +1,7 @@
 import { getSupabase } from "@/lib/supabase";
 import { AddCompetitorForm } from "./add-competitor-form";
 import { RescanButton } from "./rescan-button";
+import { DeleteButton } from "./delete-button";
 
 async function getCompetitorsWithSnapshots() {
   const { data: competitors } = await getSupabase()
@@ -19,7 +20,16 @@ async function getCompetitorsWithSnapshots() {
         .order("scraped_at", { ascending: false })
         .limit(1);
 
-      return { ...c, latestSnapshot: snapshots?.[0] || null };
+      const { count } = await getSupabase()
+        .from("snapshots")
+        .select("*", { count: "exact", head: true })
+        .eq("competitor_id", c.id);
+
+      return {
+        ...c,
+        latestSnapshot: snapshots?.[0] || null,
+        snapshotCount: count ?? 0,
+      };
     })
   );
 
@@ -77,14 +87,17 @@ export default async function DashboardPage() {
                         {c.url}
                       </a>
                     </div>
-                    {c.latestSnapshot && (
-                      <span className="text-xs text-slate-500">
-                        Last scan:{" "}
-                        {new Date(
-                          c.latestSnapshot.scraped_at
-                        ).toLocaleDateString()}
-                      </span>
-                    )}
+                    <div className="flex items-center gap-3">
+                      {c.latestSnapshot && (
+                        <span className="text-xs text-slate-500">
+                          {c.snapshotCount} scans · Last:{" "}
+                          {new Date(
+                            c.latestSnapshot.scraped_at
+                          ).toLocaleDateString()}
+                        </span>
+                      )}
+                      <DeleteButton id={c.id} />
+                    </div>
                   </div>
 
                   {c.latestSnapshot && (
