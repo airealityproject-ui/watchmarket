@@ -1,5 +1,6 @@
 import { getSupabase } from "@/lib/supabase";
 import { AddCompetitorForm } from "./add-competitor-form";
+import { RescanButton } from "./rescan-button";
 
 async function getCompetitorsWithSnapshots() {
   const { data: competitors } = await getSupabase()
@@ -46,9 +47,12 @@ export default async function DashboardPage() {
         <AddCompetitorForm />
 
         <div className="mt-10">
-          <h2 className="text-lg font-semibold mb-4">
-            Competitors ({competitors.length})
-          </h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold">
+              Competitors ({competitors.length})
+            </h2>
+            {competitors.length > 0 && <RescanButton />}
+          </div>
 
           {competitors.length === 0 ? (
             <p className="text-slate-500">
