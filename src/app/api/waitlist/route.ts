@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid email address" }, { status: 400 });
   }
 
-  const { error } = await supabase.from("waitlist").insert({ email });
+  const { error } = await getSupabase().from("waitlist").insert({ email });
 
   if (error) {
     if (error.code === "23505") {
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-  const { count } = await supabase
+  const { count } = await getSupabase()
     .from("waitlist")
     .select("*", { count: "exact", head: true });
 

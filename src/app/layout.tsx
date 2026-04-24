@@ -11,6 +11,21 @@ export const metadata: Metadata = {
   title: "Watchmarket — AI Competitive Intelligence for Startups",
   description:
     "Track your competitors automatically. AI-generated digests of pricing changes, new features, and strategic moves. From $49/month.",
+  openGraph: {
+    title: "Watchmarket — AI Competitive Intelligence",
+    description:
+      "Stop stalking your competitors manually. AI monitors pricing, features, and moves 24/7. From $49/month.",
+    url: "https://watchmarket-phi.vercel.app",
+    siteName: "Watchmarket",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Watchmarket — AI Competitive Intelligence",
+    description:
+      "Stop stalking your competitors manually. AI monitors pricing, features, and moves 24/7. From $49/month.",
+    creator: "@ai_reality_",
+  },
 };
 
 export default function RootLayout({
