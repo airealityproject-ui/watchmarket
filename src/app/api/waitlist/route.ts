@@ -1,16 +1,4 @@
-import { readFile, writeFile } from "fs/promises";
-import { join } from "path";
-
-const WAITLIST_FILE = join(process.cwd(), "waitlist.json");
-
-async function getEmails(): Promise<string[]> {
-  try {
-    const data = await readFile(WAITLIST_FILE, "utf-8");
-    return JSON.parse(data);
-  } catch {
-    return [];
-  }
-}
+import { supabase } from "@/lib/supabase";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -20,19 +8,22 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid email address" }, { status: 400 });
   }
 
-  const emails = await getEmails();
+  const { error } = await supabase.from("waitlist").insert({ email });
 
-  if (emails.includes(email)) {
-    return Response.json({ error: "Already on the waitlist" }, { status: 409 });
+  if (error) {
+    if (error.code === "23505") {
+      return Response.json({ error: "Already on the waitlist" }, { status: 409 });
+    }
+    return Response.json({ error: "Something went wrong" }, { status: 500 });
   }
-
-  emails.push(email);
-  await writeFile(WAITLIST_FILE, JSON.stringify(emails, null, 2));
 
   return Response.json({ ok: true });
 }
 
 export async function GET() {
-  const emails = await getEmails();
-  return Response.json({ count: emails.length });
+  const { count } = await supabase
+    .from("waitlist")
+    .select("*", { count: "exact", head: true });
+
+  return Response.json({ count: count ?? 0 });
 }
