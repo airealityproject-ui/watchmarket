@@ -139,6 +139,59 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Sample digest */}
+      <section className="border-t border-slate-800 px-6 py-20">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-4">
+            What you&apos;ll get every morning
+          </h2>
+          <p className="text-slate-500 text-center mb-8">
+            A real AI-generated digest — not raw data dumps
+          </p>
+          <div className="max-w-2xl mx-auto p-6 rounded-lg bg-slate-900 border border-blue-500/20">
+            <div className="text-blue-400 text-sm font-medium mb-3">
+              AI Digest — April 25, 2026
+            </div>
+            <div className="text-sm text-slate-300 space-y-3 leading-relaxed">
+              <p>
+                <span className="text-white font-medium">YNAB raised prices by 20%.</span>{" "}
+                Monthly plan went from $14.99 to $17.99. New &quot;Family&quot; tier at $24.99/month added. This signals confidence in retention but may push price-sensitive users to alternatives.
+              </p>
+              <p>
+                <span className="text-white font-medium">Suggested action:</span>{" "}
+                Create a &quot;switching from YNAB&quot; landing page and target YNAB-related keywords in the next 2 weeks while frustration is fresh.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Compare */}
+      <section className="border-t border-slate-800 px-6 py-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl font-bold mb-4">
+            Compare Watchmarket
+          </h2>
+          <p className="text-slate-500 mb-8">
+            See how we stack up against enterprise tools
+          </p>
+          <div className="flex justify-center gap-4">
+            <a
+              href="/compare/crayon"
+              className="px-6 py-3 rounded-lg bg-slate-900 border border-slate-800 text-sm text-slate-300 hover:border-slate-600 transition-colors"
+            >
+              vs Crayon
+            </a>
+            <a
+              href="/compare/klue"
+              className="px-6 py-3 rounded-lg bg-slate-900 border border-slate-800 text-sm text-slate-300 hover:border-slate-600 transition-colors"
+            >
+              vs Klue
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-slate-800 px-6 py-8 text-center text-sm text-slate-600">
         <p>
