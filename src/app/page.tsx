@@ -6,6 +6,7 @@ export default function Home() {
         <a href="/" className="font-bold text-lg">Watchmarket</a>
         <div className="flex items-center gap-3">
           <a href="/pricing" className="text-sm text-slate-400 hover:text-white transition-colors">Pricing</a>
+          <a href="/dashboard" className="text-sm text-slate-400 hover:text-white transition-colors">Dashboard</a>
           <a href="/login" className="text-sm text-slate-400 hover:text-white transition-colors">Log in</a>
           <a href="/signup" className="text-sm px-4 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-500 transition-colors">Sign up</a>
         </div>
