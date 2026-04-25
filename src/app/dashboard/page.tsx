@@ -78,7 +78,7 @@ export default async function DashboardPage() {
                   <div className="flex items-start justify-between mb-2">
                     <div>
                       <a href={`/dashboard/competitor/${c.id}`} className="font-semibold hover:text-blue-400 transition-colors block">{c.name}</a>
-                      <
+                      <a
                         href={c.url}
                         target="_blank"
                         rel="noopener noreferrer"
