@@ -5,8 +5,15 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Check auth token from login
+  const accessToken = request.cookies.get("access_token");
+  if (accessToken?.value) {
+    return NextResponse.next();
+  }
+
+  // Legacy: password-based access
   const authCookie = request.cookies.get("dashboard_auth");
-  if (authCookie?.value === process.env.DASHBOARD_PASSWORD) {
+  if (authCookie?.value && authCookie.value === process.env.DASHBOARD_PASSWORD) {
     return NextResponse.next();
   }
 
@@ -24,10 +31,8 @@ export function middleware(request: NextRequest) {
     return response;
   }
 
-  return new NextResponse("Unauthorized. Add ?password=YOUR_PASSWORD to URL.", {
-    status: 401,
-    headers: { "Content-Type": "text/plain" },
-  });
+  // Redirect to login
+  return NextResponse.redirect(new URL("/login", request.url));
 }
 
 export const config = {
