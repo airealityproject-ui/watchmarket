@@ -1,5 +1,3 @@
-import { WaitlistForm } from "./waitlist-form";
-
 export default function Home() {
   return (
     <main className="flex-1 flex flex-col">
@@ -47,17 +45,23 @@ export default function Home() {
             contracts.
           </p>
 
-          <a
-            href="/pricing"
-            className="inline-block mb-8 px-5 py-2 rounded-full bg-slate-900 border border-slate-700 text-sm text-slate-300 hover:border-blue-500 transition-colors"
-          >
-            Plans from $49/month → See pricing
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
+            <a
+              href="/signup"
+              className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500 transition-colors"
+            >
+              Get started free
+            </a>
+            <a
+              href="/pricing"
+              className="px-8 py-3 rounded-lg bg-slate-900 border border-slate-700 text-sm text-slate-300 hover:border-blue-500 transition-colors"
+            >
+              See pricing
+            </a>
+          </div>
 
-          <WaitlistForm />
-
-          <p className="mt-8 text-sm text-slate-600">
-            Early access — launching soon
+          <p className="mt-4 text-sm text-slate-600">
+            Free during early access
           </p>
         </div>
       </section>
