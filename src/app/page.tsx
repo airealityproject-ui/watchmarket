@@ -37,7 +37,7 @@ export default function Home() {
             contracts.
             <br />
             Starting at{" "}
-            <span className="text-white font-medium">$49/month</span>.
+            <a href="/pricing" className="text-white font-medium hover:text-blue-400 transition-colors">$49/month</a>.
           </p>
 
           <WaitlistForm />
