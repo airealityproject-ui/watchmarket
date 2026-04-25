@@ -22,16 +22,19 @@ interface DiffResult {
 export function RescanButton() {
   const [status, setStatus] = useState<"idle" | "loading">("idle");
   const [results, setResults] = useState<DiffResult[] | null>(null);
+  const [digest, setDigest] = useState<string | null>(null);
   const router = useRouter();
 
   async function handleRescan() {
     setStatus("loading");
     setResults(null);
+    setDigest(null);
 
     try {
       const res = await fetch("/api/competitors/rescan", { method: "POST" });
       const data = await res.json();
       setResults(data.results);
+      setDigest(data.digest || null);
       router.refresh();
     } catch {
       setResults([{ competitor: "all", error: "Failed to rescan" }]);
@@ -49,6 +52,17 @@ export function RescanButton() {
       >
         {status === "loading" ? "Scanning..." : "Rescan all"}
       </button>
+
+      {digest && (
+        <div className="mt-4 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
+          <div className="text-sm font-medium text-blue-400 mb-2">
+            AI Digest
+          </div>
+          <div className="text-sm text-slate-300 whitespace-pre-wrap">
+            {digest}
+          </div>
+        </div>
+      )}
 
       {results && (
         <div className="mt-4 space-y-2">
@@ -73,7 +87,8 @@ export function RescanButton() {
                 <div className="mt-1 space-y-1">
                   {r.diff.titleChanged && (
                     <div>
-                      Title: &quot;{r.diff.oldTitle}&quot; → &quot;{r.diff.newTitle}&quot;
+                      Title: &quot;{r.diff.oldTitle}&quot; → &quot;
+                      {r.diff.newTitle}&quot;
                     </div>
                   )}
                   {r.diff.addedHeadings.length > 0 && (
@@ -87,7 +102,8 @@ export function RescanButton() {
                     </div>
                   )}
                   <div>
-                    Text similarity: {Math.round(r.diff.textSimilarity * 100)}%
+                    Text similarity:{" "}
+                    {Math.round(r.diff.textSimilarity * 100)}%
                   </div>
                 </div>
               )}
