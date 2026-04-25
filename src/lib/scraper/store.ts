@@ -1,10 +1,10 @@
 import { getSupabase } from "@/lib/supabase";
 import { fetchPage, PageSnapshot } from "./fetch-page";
 
-export async function addCompetitor(url: string, name?: string) {
+export async function addCompetitor(url: string, name?: string, userId?: string) {
   const { data, error } = await getSupabase()
     .from("competitors")
-    .insert({ url, name: name || new URL(url).hostname })
+    .insert({ url, name: name || new URL(url).hostname, user_id: userId })
     .select()
     .single();
 
@@ -12,12 +12,17 @@ export async function addCompetitor(url: string, name?: string) {
   return data;
 }
 
-export async function listCompetitors() {
-  const { data, error } = await getSupabase()
+export async function listCompetitors(userId?: string) {
+  let query = getSupabase()
     .from("competitors")
     .select("*")
     .order("created_at", { ascending: false });
 
+  if (userId) {
+    query = query.eq("user_id", userId);
+  }
+
+  const { data, error } = await query;
   if (error) throw new Error(error.message);
   return data;
 }

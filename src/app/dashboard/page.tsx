@@ -1,12 +1,14 @@
 import { getSupabase } from "@/lib/supabase";
+import { getCurrentUserId } from "@/lib/auth";
 import { AddCompetitorForm } from "./add-competitor-form";
 import { RescanButton } from "./rescan-button";
 import { DeleteButton } from "./delete-button";
 
-async function getCompetitorsWithSnapshots() {
+async function getCompetitorsWithSnapshots(userId: string) {
   const { data: competitors } = await getSupabase()
     .from("competitors")
     .select("*")
+    .eq("user_id", userId)
     .order("created_at", { ascending: false });
 
   if (!competitors) return [];
@@ -39,7 +41,9 @@ async function getCompetitorsWithSnapshots() {
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
-  const competitors = await getCompetitorsWithSnapshots();
+  const userId = await getCurrentUserId();
+  if (!userId) return null;
+  const competitors = await getCompetitorsWithSnapshots(userId);
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
