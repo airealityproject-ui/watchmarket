@@ -32,13 +32,17 @@ export default function Home() {
             of what actually matters.
           </p>
 
-          <p className="text-slate-500 mb-10">
+          <p className="text-slate-500 mb-6">
             No more 3-4 tools stitched together. No more $15k/year enterprise
             contracts.
-            <br />
-            Starting at{" "}
-            <a href="/pricing" className="text-white font-medium hover:text-blue-400 transition-colors">$49/month</a>.
           </p>
+
+          <a
+            href="/pricing"
+            className="inline-block mb-8 px-5 py-2 rounded-full bg-slate-900 border border-slate-700 text-sm text-slate-300 hover:border-blue-500 transition-colors"
+          >
+            Plans from $49/month → See pricing
+          </a>
 
           <WaitlistForm />
 
