@@ -58,8 +58,14 @@ export async function POST() {
   }
 
   let digest: string | null = null;
+  const hasChanges = digestInputs.some((i) => i.diff.significantChange);
+
   try {
     digest = await generateDigest(digestInputs);
+    await getSupabase().from("digests").insert({
+      content: digest,
+      has_changes: hasChanges,
+    });
   } catch {
     digest = null;
   }

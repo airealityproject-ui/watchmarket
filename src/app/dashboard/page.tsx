@@ -46,12 +46,20 @@ export default async function DashboardPage() {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-2xl font-bold">Dashboard</h1>
-          <a
-            href="/"
-            className="text-sm text-slate-500 hover:text-slate-400"
-          >
-            ← Back to home
-          </a>
+          <div className="flex items-center gap-4">
+            <a
+              href="/dashboard/digests"
+              className="text-sm text-blue-400 hover:text-blue-300"
+            >
+              Digest History
+            </a>
+            <a
+              href="/"
+              className="text-sm text-slate-500 hover:text-slate-400"
+            >
+              ← Home
+            </a>
+          </div>
         </div>
 
         <AddCompetitorForm />
