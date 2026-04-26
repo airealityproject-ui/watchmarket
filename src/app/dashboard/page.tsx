@@ -3,6 +3,7 @@ import { getCurrentUserId } from "@/lib/auth";
 import { AddCompetitorForm } from "./add-competitor-form";
 import { RescanButton } from "./rescan-button";
 import { DeleteButton } from "./delete-button";
+import { RescanOneButton } from "./rescan-one-button";
 import { LogoutButton } from "./logout-button";
 
 async function getCompetitorsWithSnapshots(userId: string) {
@@ -125,6 +126,7 @@ export default async function DashboardPage() {
                           ).toLocaleDateString()}
                         </span>
                       )}
+                      <RescanOneButton competitorId={c.id} />
                       <DeleteButton id={c.id} />
                     </div>
                   </div>
