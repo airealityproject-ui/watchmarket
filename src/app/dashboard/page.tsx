@@ -73,9 +73,19 @@ export default async function DashboardPage() {
         <div className="mt-10">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold">
-              Competitors ({competitors.length})
+              Competitors ({competitors.length}/3)
             </h2>
-            {competitors.length > 0 && <RescanButton />}
+            <div className="flex items-center gap-3">
+              {competitors.length >= 3 && (
+                <a
+                  href="/pricing"
+                  className="text-xs px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-500 transition-colors"
+                >
+                  Upgrade for more
+                </a>
+              )}
+              {competitors.length > 0 && <RescanButton />}
+            </div>
           </div>
 
           {competitors.length === 0 ? (
