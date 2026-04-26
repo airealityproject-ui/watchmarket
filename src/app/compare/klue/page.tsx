@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Navbar } from "@/app/navbar";
 import { WaitlistForm } from "@/app/waitlist-form";
 
 export const metadata: Metadata = {
@@ -15,13 +16,8 @@ export const metadata: Metadata = {
 export default function KlueComparePage() {
   return (
     <main className="min-h-screen bg-slate-950 text-white">
+      <Navbar />
       <div className="max-w-3xl mx-auto px-6 py-16">
-        <a
-          href="/"
-          className="text-sm text-slate-500 hover:text-slate-400 mb-8 inline-block"
-        >
-          ← Back to Watchmarket
-        </a>
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-6">
           Watchmarket vs Klue

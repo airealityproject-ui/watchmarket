@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Navbar } from "@/app/navbar";
 import { WaitlistForm } from "@/app/waitlist-form";
 
 export const metadata: Metadata = {
@@ -59,13 +60,8 @@ const plans = [
 export default function PricingPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-white">
+      <Navbar />
       <div className="max-w-5xl mx-auto px-6 py-16">
-        <a
-          href="/"
-          className="text-sm text-slate-500 hover:text-slate-400 mb-8 inline-block"
-        >
-          ← Back to home
-        </a>
 
         <div className="text-center mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold mb-4">
