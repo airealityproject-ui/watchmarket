@@ -48,7 +48,9 @@ export default function SignupPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-white flex items-center justify-center px-6">
       <div className="max-w-sm w-full">
-        <h1 className="text-2xl font-bold mb-6 text-center">Create account</h1>
+        <a href="/" className="text-sm text-slate-500 hover:text-slate-400 mb-6 inline-block">← Back to home</a>
+        <h1 className="text-2xl font-bold mb-2 text-center">Create account</h1>
+        <p className="text-sm text-slate-500 text-center mb-6">Track up to 3 competitors for free. AI digests included.</p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"

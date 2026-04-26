@@ -37,6 +37,7 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-white flex items-center justify-center px-6">
       <div className="max-w-sm w-full">
+        <a href="/" className="text-sm text-slate-500 hover:text-slate-400 mb-6 inline-block">← Back to home</a>
         <h1 className="text-2xl font-bold mb-6 text-center">Log in</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input

@@ -79,9 +79,14 @@ export default async function DashboardPage() {
           </div>
 
           {competitors.length === 0 ? (
-            <p className="text-slate-500">
-              No competitors added yet. Add one above.
-            </p>
+            <div className="p-8 rounded-lg bg-slate-900 border border-slate-800 text-center">
+              <h3 className="font-semibold mb-2">Welcome! Let&apos;s track your first competitor.</h3>
+              <p className="text-sm text-slate-400 mb-4">
+                Paste a competitor&apos;s URL above (e.g. their pricing page) and click &quot;Add competitor&quot;.
+                We&apos;ll scan it immediately and start monitoring daily.
+              </p>
+              <p className="text-xs text-slate-600">Free plan: up to 3 competitors with daily AI digests.</p>
+            </div>
           ) : (
             <div className="space-y-4">
               {competitors.map((c) => (
