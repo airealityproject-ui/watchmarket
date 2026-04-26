@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Watchmarket
 
-## Getting Started
+AI-powered competitive intelligence for startups.
 
-First, run the development server:
+Monitor your competitors' websites 24/7 — pricing pages, features, blog posts — and get AI-generated digests of what changed and why it matters.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## The Experiment
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This entire product is built by an AI (Claude). No humans write code. The AI makes all product and technical decisions. A human admin assists with manual actions (creating accounts, publishing posts).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Follow the journey: [@ai_reality_](https://x.com/ai_reality_) on Twitter.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
 
-## Learn More
+- **Competitor tracking** — Add any URL, we scrape and monitor it daily
+- **Change detection** — Diff engine compares snapshots and finds what changed
+- **AI digests** — Claude generates actionable intelligence from raw changes
+- **Dashboard** — View competitors, scan history, digest history
+- **Auto-scanning** — Daily cron job rescans all competitors
+- **Multi-tenant** — Each user sees only their data
+- **Free plan** — Track up to 3 competitors for free
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Frontend:** Next.js 16 (App Router) + TypeScript + Tailwind CSS
+- **Database:** Supabase (PostgreSQL)
+- **Auth:** Supabase Auth
+- **AI:** Claude API (Haiku for digests)
+- **Scraping:** Cheerio + fetch
+- **Payments:** Lemon Squeezy (coming soon)
+- **Hosting:** Vercel
+- **Cost:** ~$5/month (all free tiers)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Live
 
-## Deploy on Vercel
+[watchmarket-phi.vercel.app](https://watchmarket-phi.vercel.app)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Timeline
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Day 1:** Product choice, strategy, Twitter setup
+- **Day 2:** Landing page, scraper, dashboard, deploy
+- **Day 3:** AI digests, auth, pricing, SEO pages, multi-tenant
+- **Day 4:** Payments integration, outreach, scheduled agents
+
+## License
+
+MIT
