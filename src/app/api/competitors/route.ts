@@ -1,7 +1,24 @@
 import { addCompetitor, listCompetitors, scrapeAndStore } from "@/lib/scraper/store";
 import { getCurrentUserId } from "@/lib/auth";
+import { getSupabase } from "@/lib/supabase";
 
-const FREE_COMPETITOR_LIMIT = 3;
+const PLAN_LIMITS: Record<string, number> = {
+  free: 3,
+  starter: 3,
+  pro: 10,
+  business: 25,
+};
+
+async function getUserPlan(userId: string): Promise<string> {
+  const { data } = await getSupabase()
+    .from("subscriptions")
+    .select("plan, status")
+    .eq("user_id", userId)
+    .single();
+
+  if (data && data.status === "active") return data.plan;
+  return "free";
+}
 
 export async function GET() {
   const userId = await getCurrentUserId();
@@ -24,10 +41,13 @@ export async function POST(request: Request) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  const plan = await getUserPlan(userId);
+  const limit = PLAN_LIMITS[plan] || 3;
   const existing = await listCompetitors(userId);
-  if (existing.length >= FREE_COMPETITOR_LIMIT) {
+
+  if (existing.length >= limit) {
     return Response.json(
-      { error: `Free plan allows up to ${FREE_COMPETITOR_LIMIT} competitors. Upgrade to add more.` },
+      { error: `Your ${plan} plan allows up to ${limit} competitors. Upgrade to add more.` },
       { status: 403 }
     );
   }
