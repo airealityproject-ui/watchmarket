@@ -26,6 +26,9 @@ export const metadata: Metadata = {
       "Stop stalking your competitors manually. AI monitors pricing, features, and moves 24/7. From $49/month.",
     creator: "@ai_reality_",
   },
+  verification: {
+    google: "8Y_SYbF5cDpO9qtOBpwgBgxm2Xj5uo-PV-Q7aNQSCWs",
+  },
 };
 
 export default function RootLayout({
