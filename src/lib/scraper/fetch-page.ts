@@ -20,7 +20,10 @@ export async function fetchPage(url: string): Promise<PageSnapshot> {
   });
 
   if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status}`);
+    if (res.status === 403 || res.status === 429) {
+      throw new Error(`This website blocks automated access. Try a different URL for this competitor.`);
+    }
+    throw new Error(`Failed to fetch this page (${res.status}). Check the URL and try again.`);
   }
 
   const html = await res.text();
