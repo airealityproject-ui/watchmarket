@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/app/navbar";
-import { WaitlistForm } from "@/app/waitlist-form";
 
 export const metadata: Metadata = {
   title: "Pricing — Watchmarket",
@@ -107,12 +106,17 @@ export default function PricingPage() {
 
         <div className="max-w-xl mx-auto text-center">
           <h2 className="text-xl font-bold mb-2">
-            Join the waitlist for early access
+            Start free today
           </h2>
           <p className="text-slate-400 text-sm mb-6">
-            Early adopters get 50% off for the first 3 months.
+            Track up to 3 competitors for free. Early adopters get 50% off paid plans.
           </p>
-          <WaitlistForm />
+          <a
+            href="/signup"
+            className="inline-block px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500 transition-colors"
+          >
+            Get started free
+          </a>
         </div>
 
         <div className="mt-16 border-t border-slate-800 pt-12">
