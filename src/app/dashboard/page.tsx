@@ -1,6 +1,7 @@
 import { getSupabase } from "@/lib/supabase";
 import { getCurrentUserId } from "@/lib/auth";
 import { AddCompetitorForm } from "./add-competitor-form";
+import { DiscoverForm } from "./discover-form";
 import { RescanButton } from "./rescan-button";
 import { DeleteButton } from "./delete-button";
 import { RescanOneButton } from "./rescan-one-button";
@@ -70,6 +71,7 @@ export default async function DashboardPage() {
         </div>
 
         <AddCompetitorForm />
+        <DiscoverForm />
 
         <div className="mt-10">
           <div className="flex items-center justify-between mb-4">
