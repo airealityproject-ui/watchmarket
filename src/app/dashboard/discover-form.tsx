@@ -16,6 +16,7 @@ export function DiscoverForm() {
   const [adding, setAdding] = useState<Set<string>>(new Set());
   const [added, setAdded] = useState<Set<string>>(new Set());
   const [error, setError] = useState("");
+  const [limitError, setLimitError] = useState("");
   const router = useRouter();
 
   async function handleDiscover(e: React.FormEvent) {
@@ -59,10 +60,14 @@ export function DiscoverForm() {
 
       if (res.ok) {
         setAdded((prev) => new Set(prev).add(suggestion.url));
+        setLimitError("");
         router.refresh();
+      } else {
+        const data = await res.json();
+        setLimitError(data.error || "Failed to add");
       }
     } catch {
-      // silently fail
+      setLimitError("Something went wrong");
     } finally {
       setAdding((prev) => {
         const next = new Set(prev);
@@ -101,6 +106,12 @@ export function DiscoverForm() {
 
         {suggestions.length > 0 && (
           <div className="mt-4 space-y-2">
+            {limitError && (
+              <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                {limitError}{" "}
+                <a href="/pricing" className="underline hover:text-red-300">Upgrade</a>
+              </div>
+            )}
             <p className="text-sm text-slate-400 mb-2">
               Found {suggestions.length} competitors:
             </p>
