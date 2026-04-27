@@ -64,7 +64,11 @@ export function DiscoverForm() {
         router.refresh();
       } else {
         const data = await res.json();
-        setLimitError(data.error || "Failed to add");
+        if (res.status === 403) {
+          setLimitError(data.error || "Plan limit reached");
+        } else {
+          setLimitError(data.error || "Failed to add");
+        }
       }
     } catch {
       setLimitError("Something went wrong");
@@ -108,8 +112,10 @@ export function DiscoverForm() {
           <div className="mt-4 space-y-2">
             {limitError && (
               <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-                {limitError}{" "}
-                <a href="/pricing" className="underline hover:text-red-300">Upgrade</a>
+                {limitError}
+                {limitError.includes("plan") && (
+                  <>{" "}<a href="/pricing" className="underline hover:text-red-300">Upgrade</a></>
+                )}
               </div>
             )}
             <p className="text-sm text-slate-400 mb-2">
