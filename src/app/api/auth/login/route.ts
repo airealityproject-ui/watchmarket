@@ -30,6 +30,13 @@ export async function POST(request: Request) {
     maxAge: 60 * 60 * 24 * 7,
     path: "/",
   });
+  cookieStore.set("refresh_token", data.session.refresh_token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+    maxAge: 60 * 60 * 24 * 30,
+    path: "/",
+  });
 
   return Response.json({ ok: true });
 }
