@@ -55,7 +55,13 @@ Return ONLY the JSON array, no other text.`,
   }
 
   try {
-    const suggestions = JSON.parse(textBlock.text);
+    // Extract JSON array from response, even if wrapped in markdown or extra text
+    const text = textBlock.text;
+    const jsonMatch = text.match(/\[[\s\S]*\]/);
+    if (!jsonMatch) {
+      return Response.json({ error: "No suggestions found" }, { status: 500 });
+    }
+    const suggestions = JSON.parse(jsonMatch[0]);
     return Response.json({ suggestions });
   } catch {
     return Response.json({ error: "Failed to parse suggestions" }, { status: 500 });
