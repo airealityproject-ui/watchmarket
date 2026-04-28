@@ -19,6 +19,12 @@ export function Navbar() {
       </a>
       <div className="flex items-center gap-3">
         <a
+          href="/report"
+          className="text-sm text-slate-400 hover:text-white transition-colors"
+        >
+          Free Report
+        </a>
+        <a
           href="/pricing"
           className="text-sm text-slate-400 hover:text-white transition-colors"
         >
