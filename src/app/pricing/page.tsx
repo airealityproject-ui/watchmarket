@@ -11,7 +11,7 @@ const plans = [
   {
     name: "Starter",
     price: 49,
-    checkoutUrl: "https://watchmarket.lemonsqueezy.com/checkout/buy/b01556f1-69e1-4412-b97c-4d9f4eb83d47", // test
+    checkoutUrl: "https://watchmarket.lemonsqueezy.com/checkout/buy/7288fb56-68ee-43aa-bb9c-704dd1b0633b",
     description: "For solo founders tracking a few competitors",
     features: [
       "3 competitors",
@@ -25,7 +25,7 @@ const plans = [
   {
     name: "Pro",
     price: 149,
-    checkoutUrl: "https://watchmarket.lemonsqueezy.com/checkout/buy/2b42d9c6-6a36-4e4c-adb2-1e133a269314", // test
+    checkoutUrl: "https://watchmarket.lemonsqueezy.com/checkout/buy/a3526bfe-34f2-4682-9d28-bcb5c497ebaf",
     description: "For growing teams that need deeper insights",
     features: [
       "10 competitors",
@@ -40,7 +40,7 @@ const plans = [
   {
     name: "Business",
     price: 299,
-    checkoutUrl: "https://watchmarket.lemonsqueezy.com/checkout/buy/f2d4a200-16b3-4d88-bf9c-8ef6a50edb44", // test
+    checkoutUrl: "https://watchmarket.lemonsqueezy.com/checkout/buy/8a6e3f07-cfd0-4950-9b4f-e30c5cbd69f8",
     description: "For teams running competitive programs",
     features: [
       "25 competitors",
