@@ -11,7 +11,7 @@ const plans = [
   {
     name: "Starter",
     price: 49,
-    variantId: "1586309", // test: 1586309, prod: 1585516
+    checkoutUrl: "https://watchmarket.lemonsqueezy.com/checkout/buy/b01556f1-69e1-4412-b97c-4d9f4eb83d47", // test
     description: "For solo founders tracking a few competitors",
     features: [
       "3 competitors",
@@ -25,7 +25,7 @@ const plans = [
   {
     name: "Pro",
     price: 149,
-    variantId: "1586289", // test: 1586289, prod: 1585490
+    checkoutUrl: "https://watchmarket.lemonsqueezy.com/checkout/buy/2b42d9c6-6a36-4e4c-adb2-1e133a269314", // test
     description: "For growing teams that need deeper insights",
     features: [
       "10 competitors",
@@ -40,7 +40,7 @@ const plans = [
   {
     name: "Business",
     price: 299,
-    variantId: "1586316", // test: 1586316, prod: 1585517
+    checkoutUrl: "https://watchmarket.lemonsqueezy.com/checkout/buy/f2d4a200-16b3-4d88-bf9c-8ef6a50edb44", // test
     description: "For teams running competitive programs",
     features: [
       "25 competitors",
@@ -101,7 +101,7 @@ export default function PricingPage() {
                 ))}
               </ul>
               <a
-                href={`https://watchmarket.lemonsqueezy.com/checkout/buy/${plan.variantId}`}
+                href={plan.checkoutUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`block w-full text-center py-2.5 rounded-lg font-medium transition-colors ${
