@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navbar } from "@/app/navbar";
 
 interface ReportData {
@@ -13,6 +13,14 @@ export default function ReportPage() {
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [data, setData] = useState<ReportData | null>(null);
   const [error, setError] = useState("");
+  const [loggedIn, setLoggedIn] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then((r) => r.json())
+      .then((d) => setLoggedIn(d.loggedIn))
+      .catch(() => setLoggedIn(false));
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -61,15 +69,24 @@ export default function ReportPage() {
               rows={4}
               className="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500 resize-none"
             />
-            <button
-              type="submit"
-              disabled={status === "loading" || !description}
-              className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500 disabled:opacity-50 cursor-pointer"
-            >
-              {status === "loading"
-                ? "Analyzing competitors... (30-60 sec)"
-                : "Generate free report"}
-            </button>
+            {loggedIn === false ? (
+              <a
+                href="/signup?redirect=/report"
+                className="inline-block px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500"
+              >
+                Sign up free to generate
+              </a>
+            ) : (
+              <button
+                type="submit"
+                disabled={status === "loading" || !description || loggedIn === null}
+                className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500 disabled:opacity-50 cursor-pointer"
+              >
+                {status === "loading"
+                  ? "Analyzing competitors... (30-60 sec)"
+                  : "Generate free report"}
+              </button>
+            )}
             {status === "error" && (
               <p className="text-red-400 text-sm">{error}</p>
             )}

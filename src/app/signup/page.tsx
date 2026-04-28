@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function SignupPage() {
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -82,7 +85,7 @@ export default function SignupPage() {
         </form>
         <p className="text-sm text-slate-500 mt-4 text-center">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-400 hover:text-blue-300">
+          <a href={`/login${redirect ? `?redirect=${redirect}` : ""}`} className="text-blue-400 hover:text-blue-300">
             Log in
           </a>
         </p>
