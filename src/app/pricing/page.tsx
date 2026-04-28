@@ -11,6 +11,7 @@ const plans = [
   {
     name: "Starter",
     price: 49,
+    variantId: "1585516",
     description: "For solo founders tracking a few competitors",
     features: [
       "3 competitors",
@@ -19,12 +20,12 @@ const plans = [
       "Dashboard access",
       "Email alerts",
     ],
-    cta: "Join waitlist",
     highlighted: false,
   },
   {
     name: "Pro",
     price: 149,
+    variantId: "1585490",
     description: "For growing teams that need deeper insights",
     features: [
       "10 competitors",
@@ -34,12 +35,12 @@ const plans = [
       "API access",
       "Priority support",
     ],
-    cta: "Join waitlist",
     highlighted: true,
   },
   {
     name: "Business",
     price: 299,
+    variantId: "1585517",
     description: "For teams running competitive programs",
     features: [
       "25 competitors",
@@ -51,7 +52,6 @@ const plans = [
       "Slack integration",
       "Dedicated support",
     ],
-    cta: "Join waitlist",
     highlighted: false,
   },
 ];
@@ -100,6 +100,18 @@ export default function PricingPage() {
                   </li>
                 ))}
               </ul>
+              <a
+                href={`https://watchmarket.lemonsqueezy.com/checkout/buy/${plan.variantId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`block w-full text-center py-2.5 rounded-lg font-medium transition-colors ${
+                  plan.highlighted
+                    ? "bg-blue-600 text-white hover:bg-blue-500"
+                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                }`}
+              >
+                Subscribe
+              </a>
             </div>
           ))}
         </div>
