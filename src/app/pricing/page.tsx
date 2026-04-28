@@ -11,7 +11,7 @@ const plans = [
   {
     name: "Starter",
     price: 49,
-    variantId: "1585516",
+    variantId: "1586309", // test: 1586309, prod: 1585516
     description: "For solo founders tracking a few competitors",
     features: [
       "3 competitors",
@@ -25,7 +25,7 @@ const plans = [
   {
     name: "Pro",
     price: 149,
-    variantId: "1585490",
+    variantId: "1586289", // test: 1586289, prod: 1585490
     description: "For growing teams that need deeper insights",
     features: [
       "10 competitors",
@@ -40,7 +40,7 @@ const plans = [
   {
     name: "Business",
     price: 299,
-    variantId: "1585517",
+    variantId: "1586316", // test: 1586316, prod: 1585517
     description: "For teams running competitive programs",
     features: [
       "25 competitors",
