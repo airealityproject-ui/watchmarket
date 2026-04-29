@@ -1,21 +1,61 @@
 import { Navbar } from "./navbar";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Watchmarket",
-  applicationCategory: "BusinessApplication",
-  description:
-    "AI-powered competitive intelligence for startups. Monitor competitors 24/7 and get smart digests of pricing changes, new features, and strategic moves.",
-  offers: {
-    "@type": "AggregateOffer",
-    lowPrice: "0",
-    highPrice: "299",
-    priceCurrency: "USD",
-    offerCount: "4",
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Watchmarket",
+    applicationCategory: "BusinessApplication",
+    description:
+      "AI-powered competitive intelligence for startups. Monitor competitors 24/7 and get smart digests of pricing changes, new features, and strategic moves.",
+    offers: {
+      "@type": "AggregateOffer",
+      lowPrice: "0",
+      highPrice: "299",
+      priceCurrency: "USD",
+      offerCount: "4",
+    },
+    operatingSystem: "Web",
   },
-  operatingSystem: "Web",
-};
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What does Watchmarket monitor?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "We scan your competitors' web pages daily — pricing pages, feature lists, blog posts, landing pages. We detect changes in titles, descriptions, content, and page structure.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How are AI digests different from raw alerts?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Most tools send you a screenshot or a diff. Watchmarket uses AI to analyze changes and explain what they mean — is it a pricing shift? A new feature launch? A strategic pivot? Plus, you get a recommended action.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is there a free plan?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Track up to 3 competitors with daily AI digests — free forever. No credit card required.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How is this different from Crayon or Klue?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Crayon and Klue are enterprise tools ($15k+/year) designed for large sales teams. Watchmarket is built for startups and small teams — self-serve, AI-powered, from $49/month.",
+        },
+      },
+    ],
+  },
+];
 
 export default function Home() {
   return (
@@ -239,6 +279,56 @@ export default function Home() {
             >
               vs Competitors.app
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="border-t border-slate-800 px-6 py-20">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-12">
+            Frequently asked questions
+          </h2>
+          <div className="space-y-6">
+            {[
+              {
+                q: "What does Watchmarket monitor?",
+                a: "We scan your competitors' web pages daily — pricing pages, feature lists, blog posts, landing pages. We detect changes in titles, descriptions, content, and page structure.",
+              },
+              {
+                q: "How are AI digests different from raw alerts?",
+                a: "Most tools send you a screenshot or a diff. Watchmarket uses AI to analyze changes and explain what they mean — is it a pricing shift? A new feature launch? A strategic pivot? Plus, you get a recommended action.",
+              },
+              {
+                q: "Is there a free plan?",
+                a: "Yes. Track up to 3 competitors with daily AI digests — free forever. No credit card required.",
+              },
+              {
+                q: "How is this different from Crayon or Klue?",
+                a: "Crayon and Klue are enterprise tools ($15k+/year) designed for large sales teams. Watchmarket is built for startups and small teams — self-serve, AI-powered, from $49/month.",
+              },
+              {
+                q: "What's the free AI competitor report?",
+                a: "Describe your product in one sentence and our AI will find your top competitors, analyze their pricing and positioning, identify market gaps, and suggest how to differentiate. No signup required.",
+              },
+              {
+                q: "Is this really built by an AI?",
+                a: "Yes. All product decisions, code, and strategy are made by Claude (AI). A human admin handles manual tasks like creating accounts and posting on social media. Follow the journey @ai_reality_ on Twitter.",
+              },
+            ].map((faq) => (
+              <details
+                key={faq.q}
+                className="group p-5 rounded-lg bg-slate-900 border border-slate-800"
+              >
+                <summary className="cursor-pointer font-medium text-sm flex items-center justify-between">
+                  {faq.q}
+                  <span className="text-slate-500 group-open:rotate-45 transition-transform text-lg ml-4">+</span>
+                </summary>
+                <p className="mt-3 text-sm text-slate-400 leading-relaxed">
+                  {faq.a}
+                </p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
