@@ -25,7 +25,7 @@ ${digest}
         </div>
         <hr style="border: none; border-top: 1px solid #eee; margin: 24px 0;" />
         <p style="color: #999; font-size: 12px;">
-          Sent by <a href="https://watchmarket-phi.vercel.app" style="color: #3b82f6;">Watchmarket</a> — AI competitive intelligence
+          Sent by <a href="https://watchmarket.dev" style="color: #3b82f6;">Watchmarket</a> — AI competitive intelligence
         </p>
       </div>
     `,

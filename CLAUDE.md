@@ -14,7 +14,7 @@ npm run lint         # ESLint
 npx tsc --noEmit     # Type check without emitting
 ```
 
-Deployed on Vercel (auto-deploy on push). Production URL: `watchmarket-phi.vercel.app`
+Deployed on Vercel (auto-deploy on push). Production URL: `watchmarket.dev`
 
 ## Architecture
 
@@ -47,7 +47,7 @@ Next.js 16 App Router, TypeScript, Tailwind CSS v4. All source code lives in `ap
 ### AI Integration
 - Claude Haiku (`claude-haiku-4-5-20251001`) for competitor discovery and report generation
 - `src/lib/ai/digest.ts` — AI digest generation from snapshot diffs
-- `src/app/api/report/route.ts` — free report: discover competitors -> scrape each -> generate analysis (no auth required)
+- `src/app/api/report/route.ts` — free report: discover competitors -> scrape each -> generate analysis
 - `src/app/api/competitors/discover/route.ts` — AI competitor discovery (auth required)
 - JSON parsing from Claude responses uses regex extraction: `text.match(/\[[\s\S]*\]/)`
 
@@ -58,7 +58,7 @@ Next.js 16 App Router, TypeScript, Tailwind CSS v4. All source code lives in `ap
 
 ### Key Pages
 - `/` — landing page (server component)
-- `/report` — free AI competitor report (client component, no auth)
+- `/report` — free AI competitor report (client component, requires auth via client-side check)
 - `/dashboard` — main app with competitor list, add/discover/rescan/delete (auth required)
 - `/pricing` — 3-tier pricing with Lemon Squeezy checkout links
 - `/compare/*` — SEO comparison pages (vs Crayon, vs Klue)

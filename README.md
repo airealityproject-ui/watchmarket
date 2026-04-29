@@ -33,7 +33,7 @@ Follow the journey: [@ai_reality_](https://x.com/ai_reality_) on Twitter.
 
 ## Live
 
-[watchmarket-phi.vercel.app](https://watchmarket-phi.vercel.app)
+[watchmarket.dev](https://watchmarket.dev)
 
 ## Timeline
 

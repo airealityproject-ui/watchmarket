@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/app/navbar";
-import { WaitlistForm } from "@/app/waitlist-form";
 
 export const metadata: Metadata = {
   title: "Watchmarket vs Crayon — Affordable Competitive Intelligence",
@@ -151,13 +150,25 @@ export default function CrayonComparePage() {
 
         <div className="bg-slate-900 border border-slate-800 rounded-lg p-8 text-center">
           <h2 className="text-xl font-bold mb-2">
-            Try Watchmarket — free during early access
+            Try Watchmarket free
           </h2>
           <p className="text-slate-400 mb-6 text-sm">
-            Join the waitlist. Be the first to get AI-powered competitive
-            intelligence at a startup-friendly price.
+            Get AI-powered competitive intelligence in 2 minutes. No credit card required.
           </p>
-          <WaitlistForm />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href="/signup"
+              className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500 transition-colors"
+            >
+              Get started free
+            </a>
+            <a
+              href="/report"
+              className="px-8 py-3 rounded-lg bg-slate-800 border border-slate-700 text-sm text-slate-300 hover:border-slate-600 transition-colors"
+            >
+              Try free report first
+            </a>
+          </div>
         </div>
       </div>
     </main>

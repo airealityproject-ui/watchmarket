@@ -26,7 +26,7 @@ export async function createCheckoutUrl(
       custom: { user_id: userId },
     },
     productOptions: {
-      redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL || "https://watchmarket-phi.vercel.app"}/dashboard`,
+      redirectUrl: `${process.env.NEXT_PUBLIC_APP_URL || "https://watchmarket.dev"}/dashboard`,
     },
   });
 

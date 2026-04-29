@@ -9,6 +9,7 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://watchmarket.dev"),
   title: "Watchmarket — AI Competitive Intelligence for Startups",
   description:
     "Track your competitors automatically. AI-generated digests of pricing changes, new features, and strategic moves. From $49/month.",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     title: "Watchmarket — AI Competitive Intelligence",
     description:
       "Stop stalking your competitors manually. AI monitors pricing, features, and moves 24/7. From $49/month.",
-    url: "https://watchmarket-phi.vercel.app",
+    url: "https://watchmarket.dev",
     siteName: "Watchmarket",
     type: "website",
   },

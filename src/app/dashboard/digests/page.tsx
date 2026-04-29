@@ -1,11 +1,17 @@
 import { getSupabase } from "@/lib/supabase";
+import { getCurrentUserId } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
 export default async function DigestsPage() {
+  const userId = await getCurrentUserId();
+  if (!userId) redirect("/login");
+
   const { data: digests } = await getSupabase()
     .from("digests")
     .select("*")
+    .eq("user_id", userId)
     .order("created_at", { ascending: false })
     .limit(30);
 

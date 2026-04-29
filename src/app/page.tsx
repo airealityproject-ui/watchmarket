@@ -1,8 +1,29 @@
 import { Navbar } from "./navbar";
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Watchmarket",
+  applicationCategory: "BusinessApplication",
+  description:
+    "AI-powered competitive intelligence for startups. Monitor competitors 24/7 and get smart digests of pricing changes, new features, and strategic moves.",
+  offers: {
+    "@type": "AggregateOffer",
+    lowPrice: "0",
+    highPrice: "299",
+    priceCurrency: "USD",
+    offerCount: "4",
+  },
+  operatingSystem: "Web",
+};
+
 export default function Home() {
   return (
     <main className="flex-1 flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
 
       {/* Hero */}
@@ -187,7 +208,7 @@ export default function Home() {
           <p className="text-slate-500 mb-8">
             See how we stack up against enterprise tools
           </p>
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3">
             <a
               href="/compare/crayon"
               className="px-6 py-3 rounded-lg bg-slate-900 border border-slate-800 text-sm text-slate-300 hover:border-slate-600 transition-colors"
@@ -199,6 +220,24 @@ export default function Home() {
               className="px-6 py-3 rounded-lg bg-slate-900 border border-slate-800 text-sm text-slate-300 hover:border-slate-600 transition-colors"
             >
               vs Klue
+            </a>
+            <a
+              href="/compare/kompyte"
+              className="px-6 py-3 rounded-lg bg-slate-900 border border-slate-800 text-sm text-slate-300 hover:border-slate-600 transition-colors"
+            >
+              vs Kompyte
+            </a>
+            <a
+              href="/compare/similarweb"
+              className="px-6 py-3 rounded-lg bg-slate-900 border border-slate-800 text-sm text-slate-300 hover:border-slate-600 transition-colors"
+            >
+              vs Similarweb
+            </a>
+            <a
+              href="/compare/competitors-app"
+              className="px-6 py-3 rounded-lg bg-slate-900 border border-slate-800 text-sm text-slate-300 hover:border-slate-600 transition-colors"
+            >
+              vs Competitors.app
             </a>
           </div>
         </div>

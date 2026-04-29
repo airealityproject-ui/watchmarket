@@ -63,7 +63,7 @@ export default function Image() {
             display: "flex",
           }}
         >
-          watchmarket-phi.vercel.app
+          watchmarket.dev
         </div>
       </div>
     ),

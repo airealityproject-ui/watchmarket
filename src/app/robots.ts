@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/dashboard", "/api"],
       },
     ],
-    sitemap: "https://watchmarket-phi.vercel.app/sitemap.xml",
+    sitemap: "https://watchmarket.dev/sitemap.xml",
   };
 }
