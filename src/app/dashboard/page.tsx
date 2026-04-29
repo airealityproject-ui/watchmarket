@@ -92,12 +92,30 @@ export default async function DashboardPage() {
           </div>
 
           {competitors.length === 0 ? (
-            <div className="p-8 rounded-lg bg-slate-900 border border-slate-800 text-center">
-              <h3 className="font-semibold mb-2">Welcome! Let&apos;s track your first competitor.</h3>
-              <p className="text-sm text-slate-400 mb-4">
-                Paste a competitor&apos;s URL above (e.g. their pricing page) and click &quot;Add competitor&quot;.
-                We&apos;ll scan it immediately and start monitoring daily.
+            <div className="p-8 rounded-lg bg-slate-900 border border-blue-500/20 text-center">
+              <div className="text-4xl mb-4">👋</div>
+              <h3 className="text-lg font-semibold mb-2">Welcome to Watchmarket!</h3>
+              <p className="text-sm text-slate-400 mb-6 max-w-md mx-auto">
+                Start monitoring your competitors in 3 easy steps:
               </p>
+              <div className="grid sm:grid-cols-3 gap-4 mb-6 text-left">
+                <div className="p-4 rounded-lg bg-slate-800/50">
+                  <div className="text-blue-400 font-bold text-sm mb-1">Step 1</div>
+                  <p className="text-sm text-slate-300">Paste a competitor&apos;s URL above</p>
+                  <p className="text-xs text-slate-500 mt-1">e.g. their pricing or features page</p>
+                </div>
+                <div className="p-4 rounded-lg bg-slate-800/50">
+                  <div className="text-blue-400 font-bold text-sm mb-1">Step 2</div>
+                  <p className="text-sm text-slate-300">We scan it instantly</p>
+                  <p className="text-xs text-slate-500 mt-1">Title, content, headings, links</p>
+                </div>
+                <div className="p-4 rounded-lg bg-slate-800/50">
+                  <div className="text-blue-400 font-bold text-sm mb-1">Step 3</div>
+                  <p className="text-sm text-slate-300">Get daily AI digests</p>
+                  <p className="text-xs text-slate-500 mt-1">What changed, why it matters, what to do</p>
+                </div>
+              </div>
+              <p className="text-xs text-slate-500 mb-4">Or use &quot;Discover competitors&quot; above — describe your product and AI will find them for you.</p>
               <p className="text-xs text-slate-600">Free plan: up to 3 competitors with daily AI digests.</p>
             </div>
           ) : (
