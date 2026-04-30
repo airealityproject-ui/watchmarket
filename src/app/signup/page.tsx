@@ -23,11 +23,17 @@ function SignupForm() {
     e.preventDefault();
     setStatus("loading");
 
+    const utm = {
+      source: searchParams.get("utm_source") || undefined,
+      medium: searchParams.get("utm_medium") || undefined,
+      campaign: searchParams.get("utm_campaign") || undefined,
+    };
+
     try {
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, utm }),
       });
       const data = await res.json();
 

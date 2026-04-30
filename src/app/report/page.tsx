@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { Navbar } from "@/app/navbar";
 
 interface ReportData {
@@ -9,18 +11,19 @@ interface ReportData {
 }
 
 export default function ReportPage() {
+  return (
+    <Suspense>
+      <ReportContent />
+    </Suspense>
+  );
+}
+
+function ReportContent() {
+  const searchParams = useSearchParams();
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [data, setData] = useState<ReportData | null>(null);
   const [error, setError] = useState("");
-  const [loggedIn, setLoggedIn] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    fetch("/api/auth/me")
-      .then((r) => r.json())
-      .then((d) => setLoggedIn(d.loggedIn))
-      .catch(() => setLoggedIn(false));
-  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -30,10 +33,16 @@ export default function ReportPage() {
     setError("");
 
     try {
+      const utm = {
+        source: searchParams.get("utm_source") || undefined,
+        medium: searchParams.get("utm_medium") || undefined,
+        campaign: searchParams.get("utm_campaign") || undefined,
+      };
+
       const res = await fetch("/api/report", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ description }),
+        body: JSON.stringify({ description, utm }),
       });
 
       if (res.ok) {
@@ -69,24 +78,16 @@ export default function ReportPage() {
               rows={4}
               className="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500 resize-none"
             />
-            {loggedIn === false ? (
-              <a
-                href="/signup?redirect=/report"
-                className="inline-block px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500"
-              >
-                Sign up free to generate
-              </a>
-            ) : (
-              <button
-                type="submit"
-                disabled={status === "loading" || !description || loggedIn === null}
-                className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500 disabled:opacity-50 cursor-pointer"
-              >
-                {status === "loading"
-                  ? "Analyzing competitors... (30-60 sec)"
-                  : "Generate free report"}
-              </button>
-            )}
+            <button
+              type="submit"
+              disabled={status === "loading" || !description}
+              className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500 disabled:opacity-50 cursor-pointer"
+            >
+              {status === "loading"
+                ? "Analyzing competitors... (30-60 sec)"
+                : "Generate free report"}
+            </button>
+            <p className="text-xs text-slate-500">No signup required. 100% free.</p>
             {status === "error" && (
               <p className="text-red-400 text-sm">{error}</p>
             )}
@@ -134,17 +135,50 @@ export default function ReportPage() {
               </div>
             </div>
 
-            <div className="mt-8 p-6 rounded-lg bg-blue-500/10 border border-blue-500/20 text-center">
-              <h3 className="font-bold mb-2">Want daily updates on these competitors?</h3>
-              <p className="text-sm text-slate-400 mb-4">
-                Sign up for Watchmarket and monitor them automatically.
-              </p>
+            <div className="mt-6 flex items-center gap-3">
+              <span className="text-sm text-slate-500">Share this report:</span>
               <a
-                href="/signup"
-                className="inline-block px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500 transition-colors"
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Just got a free AI competitive analysis for my product. Pretty useful!\n\nTry it yourself:`)}&url=${encodeURIComponent("https://watchmarket.dev/report?utm_source=twitter&utm_medium=share")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-400 hover:border-blue-500 hover:text-white transition-colors"
               >
-                Start monitoring free
+                Share on X
               </a>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText("https://watchmarket.dev/report?utm_source=copy&utm_medium=share");
+                }}
+                className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-400 hover:border-blue-500 hover:text-white transition-colors cursor-pointer"
+              >
+                Copy link
+              </button>
+            </div>
+
+            <div className="mt-8 p-6 rounded-lg bg-blue-500/10 border border-blue-500/20">
+              <h3 className="font-bold mb-2 text-center">This report is a snapshot. Want to stay ahead?</h3>
+              <div className="grid sm:grid-cols-3 gap-3 mb-4 text-sm text-slate-300">
+                <div className="flex items-start gap-2">
+                  <span className="text-blue-400 mt-0.5">&#10003;</span>
+                  <span>Daily AI digests when competitors change pricing or features</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-blue-400 mt-0.5">&#10003;</span>
+                  <span>Email alerts so you never miss a move</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-blue-400 mt-0.5">&#10003;</span>
+                  <span>Track up to 3 competitors free — forever</span>
+                </div>
+              </div>
+              <div className="text-center">
+                <a
+                  href="/signup?utm_source=report&utm_medium=cta"
+                  className="inline-block px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500 transition-colors"
+                >
+                  Start monitoring free — no credit card
+                </a>
+              </div>
             </div>
           </div>
         )}

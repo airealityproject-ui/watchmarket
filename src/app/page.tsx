@@ -102,21 +102,21 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
             <a
-              href="/signup"
+              href="/report"
               className="px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-500 transition-colors"
             >
-              Get started free
+              Get free competitor report
             </a>
             <a
-              href="/pricing"
+              href="/signup"
               className="px-8 py-3 rounded-lg bg-slate-900 border border-slate-700 text-sm text-slate-300 hover:border-blue-500 transition-colors"
             >
-              See pricing
+              Sign up free
             </a>
           </div>
 
           <p className="mt-4 text-sm text-slate-600">
-            Free during early access
+            No signup required for the free report
           </p>
         </div>
       </section>

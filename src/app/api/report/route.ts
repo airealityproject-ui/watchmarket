@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { fetchPage } from "@/lib/scraper/fetch-page";
+import { getSupabase } from "@/lib/supabase";
 
 let _client: Anthropic | null = null;
 
@@ -12,8 +13,28 @@ function getClient(): Anthropic {
   return _client;
 }
 
+// Simple in-memory rate limiting: 5 reports per IP per hour
+const rateLimit = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimit.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateLimit.set(ip, { count: 1, resetAt: now + 3600_000 });
+    return true;
+  }
+  if (entry.count >= 5) return false;
+  entry.count++;
+  return true;
+}
+
 export async function POST(request: Request) {
-  const { description } = await request.json();
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (!checkRateLimit(ip)) {
+    return Response.json({ error: "Too many reports. Please try again in an hour." }, { status: 429 });
+  }
+
+  const { description, utm } = await request.json();
 
   if (!description || description.length < 10) {
     return Response.json({ error: "Describe your product in at least 10 characters" }, { status: 400 });
@@ -109,6 +130,16 @@ Be specific. Use real data from the scraping. No fluff.`,
   });
 
   const reportText = reportMsg.content.find((b) => b.type === "text");
+
+  // Track report generation (fire and forget)
+  getSupabase().from("report_analytics").insert({
+    description: description.slice(0, 200),
+    competitors_count: scrapedData.length,
+    ip_hash: ip.slice(0, 8),
+    utm_source: utm?.source,
+    utm_medium: utm?.medium,
+    utm_campaign: utm?.campaign,
+  }).then(() => {});
 
   return Response.json({
     competitors: scrapedData.map((c) => ({
